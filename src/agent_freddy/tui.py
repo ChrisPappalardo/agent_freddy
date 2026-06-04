@@ -115,6 +115,7 @@ class FredExplorerApp(App[None]):
         if row_key is None:
             return
         try:
+            # Search rows are keyed by list index (stored as a string key on insert).
             idx = int(str(row_key))
             series = self.results[idx]
         except (ValueError, IndexError):
@@ -189,4 +190,3 @@ def run_from_env() -> None:
     if not api_key:
         raise SystemExit("Set FRED_API_KEY before running fred-tui.")
     run_tui(api_key)
-

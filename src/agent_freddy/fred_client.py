@@ -12,6 +12,8 @@ class FredApiError(RuntimeError):
 
 @dataclass(slots=True)
 class FredClient:
+    """Minimal typed wrapper around core FRED API v1 endpoints."""
+
     api_key: str
     base_url: str = "https://api.stlouisfed.org/fred"
     timeout_seconds: float = 20.0
@@ -54,11 +56,13 @@ class FredClient:
             order_by="search_rank",
             sort_order="desc",
         )
+        # FRED uses the non-standard key name "seriess" for this endpoint family.
         seriess = payload.get("seriess", [])
         return seriess if isinstance(seriess, list) else []
 
     def get_series(self, series_id: str) -> dict[str, Any]:
         payload = self._request("series", series_id=series_id)
+        # This endpoint also returns results under "seriess", usually as a single-item list.
         seriess = payload.get("seriess", [])
         if not isinstance(seriess, list) or not seriess:
             raise FredApiError(f"No series found for id '{series_id}'.")
@@ -91,4 +95,3 @@ class FredClient:
         payload = self._request("series/observations", **params)
         observations = payload.get("observations", [])
         return observations if isinstance(observations, list) else []
-
