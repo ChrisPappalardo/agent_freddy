@@ -294,7 +294,7 @@ class FredExplorerApp(App[None]):
             details.update("Select a series before exporting.")
             return
 
-        suggested_path = str(Path.cwd() / f"{series_id}.csv")
+        suggested_path = str(Path.cwd() / ".export" / f"{series_id}.csv")
         self.push_screen(ExportPathScreen(suggested_path), self._export_current_series)
 
     def _export_current_series(self, destination_path: str | None) -> None:
