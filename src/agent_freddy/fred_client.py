@@ -95,3 +95,25 @@ class FredClient:
         payload = self._request("series/observations", **params)
         observations = payload.get("observations", [])
         return observations if isinstance(observations, list) else []
+
+    def get_all_series_observations(
+        self, series_id: str, *, sort_order: str = "asc", page_size: int = 100000
+    ) -> list[dict[str, Any]]:
+        observations: list[dict[str, Any]] = []
+        offset = 0
+
+        while True:
+            batch = self.get_series_observations(
+                series_id,
+                limit=page_size,
+                offset=offset,
+                sort_order=sort_order,
+            )
+            if not batch:
+                break
+            observations.extend(batch)
+            if len(batch) < page_size:
+                break
+            offset += len(batch)
+
+        return observations

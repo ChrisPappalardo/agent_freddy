@@ -55,4 +55,5 @@ uv run fred tui
 In the TUI:
 - Type a query and press Enter (or click Search).
 - Select a result row to view description, availability, and recent observations.
+- Use **Export CSV** to open a path prompt (prefilled with a suggested filename) and write all available observations.
 - Press `q` to quit.
