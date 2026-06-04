@@ -52,6 +52,14 @@ Launch the interactive explorer:
 uv run fred tui
 ```
 
+<p align="center">
+  <img
+    src="./docs/images/agent_freddy_tui.jpg"
+    alt="Screenshot of the agent-freddy Textual UI showing FRED search results and observations"
+    width="1100"
+  />
+</p>
+
 In the TUI:
 - Type a query and press Enter (or click Search).
 - Select a result row to view description and recent observations.
