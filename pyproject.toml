@@ -14,6 +14,14 @@ dependencies = [
     "textual>=8.2.7",
 ]
 
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.0",
+]
+
 [project.scripts]
 fred = "agent_freddy.cli:cli"
 fred-tui = "agent_freddy.tui:run_from_env"
@@ -26,3 +34,19 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "-q",
+    "--cov=agent_freddy.cli",
+    "--cov=agent_freddy.fred_client",
+    "--cov-report=term-missing",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

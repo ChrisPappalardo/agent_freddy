@@ -47,7 +47,9 @@ class FredClient:
 
         return payload
 
-    def search_series(self, search_text: str, limit: int = 10, offset: int = 0) -> list[dict[str, Any]]:
+    def search_series(
+        self, search_text: str, limit: int = 10, offset: int = 0
+    ) -> list[dict[str, Any]]:
         payload = self._request(
             "series/search",
             search_text=search_text,

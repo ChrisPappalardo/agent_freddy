@@ -153,4 +153,3 @@ def tui_command(client: FredClient) -> None:
 
 if __name__ == "__main__":
     cli()
-

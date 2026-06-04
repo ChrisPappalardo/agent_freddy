@@ -57,3 +57,33 @@ In the TUI:
 - Select a result row to view description, availability, and recent observations.
 - Use **Export CSV** to open a path prompt (prefilled with a suggested filename) and write all available observations.
 - Press `q` to quit.
+
+## Development checks
+
+Install pre-commit hooks with:
+
+```bash
+uv run pre-commit install
+```
+
+Run tests and linting with:
+
+```bash
+uv run ruff check .
+uv run pytest
+```
+
+Run pre-commit checks with:
+
+```bash
+uv run pre-commit run --all-files
+```
+
+Or if you have `make` installed, you can run these commands like so:
+
+```bash
+make pre-commit-install
+make pre-commit
+make lint
+make test
+```

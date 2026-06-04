@@ -265,7 +265,11 @@ class FredExplorerApp(App[None]):
 
         try:
             series = self.client.get_series(series_id)
-            observations = self.client.get_series_observations(series_id, limit=30, sort_order="desc")
+            observations = self.client.get_series_observations(
+                series_id,
+                limit=30,
+                sort_order="desc",
+            )
         except FredApiError as exc:
             details.update(f"Unable to load series {series_id}:\n{exc}")
             return
@@ -332,7 +336,11 @@ class FredExplorerApp(App[None]):
             self.query_one("#query", Input).focus()
             return
 
-        header = _series_details_text(self.current_series) if self.current_series else f"ID: {series_id}"
+        header = (
+            _series_details_text(self.current_series)
+            if self.current_series
+            else f"ID: {series_id}"
+        )
         details.update(
             f"{header}\n\nExported {len(observations)} observations to {output_path.name} "
             f"in {output_path.parent}"
