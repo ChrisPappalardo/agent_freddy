@@ -54,7 +54,8 @@ uv run fred tui
 
 In the TUI:
 - Type a query and press Enter (or click Search).
-- Select a result row to view description, availability, and recent observations.
+- Select a result row to view description and recent observations.
+- Use **Show Chart** to open a popup with a date-based line chart and editable start/end date fields.
 - Use **Export CSV** to open a path prompt (prefilled to `.export/<SERIES_ID>.csv`) and write all available observations.
 - Press `q` to quit.
 
