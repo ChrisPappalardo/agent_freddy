@@ -9,7 +9,7 @@ from typing import Any
 import plotext as plt
 from textual import events
 from textual.app import App, ComposeResult
-from textual.containers import Horizontal, Vertical
+from textual.containers import Horizontal, Vertical, VerticalScroll
 from textual.screen import ModalScreen
 from textual.widgets import Button, DataTable, Footer, Header, Input, Static
 
@@ -355,10 +355,15 @@ class FredExplorerApp(App[None]):
         width: 1fr;
     }
 
-    #details {
+    #details-pane {
         height: 1fr;
-        padding: 1;
         border: round $surface;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    #details {
+        padding: 1;
     }
 
     #observations {
@@ -431,7 +436,8 @@ class FredExplorerApp(App[None]):
         with Horizontal(id="content"):
             yield DataTable(id="results")
             with Vertical(id="right"):
-                yield Static("Search for a series to begin.", id="details")
+                with VerticalScroll(id="details-pane"):
+                    yield Static("Search for a series to begin.", id="details")
                 yield DataTable(id="observations")
         yield Footer()
 
@@ -443,6 +449,9 @@ class FredExplorerApp(App[None]):
         obs_table = self.query_one("#observations", DataTable)
         obs_table.cursor_type = "row"
         obs_table.add_columns("Date", "Value")
+
+        details_pane = self.query_one("#details-pane", VerticalScroll)
+        details_pane.can_focus = True
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "search":
