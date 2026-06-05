@@ -16,3 +16,4 @@ wheels/
 # project
 .export/*
 !.export/.gitkeep
+.secrets

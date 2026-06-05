@@ -18,6 +18,8 @@ uv sync
 export FRED_API_KEY="your_32_char_key"
 ```
 
+You can add this to `.secrets` and then `source .secrets` when you use the app.
+
 ## Click CLI
 
 Search for series by keyword:
