@@ -448,7 +448,7 @@ class FredExplorerApp(App[None]):
 
         obs_table = self.query_one("#observations", DataTable)
         obs_table.cursor_type = "row"
-        obs_table.add_columns("Date", "Value")
+        obs_table.add_columns("Realtime Start", "Realtime End", "Date", "Value")
 
         details_pane = self.query_one("#details-pane", VerticalScroll)
         details_pane.can_focus = True
@@ -548,12 +548,17 @@ class FredExplorerApp(App[None]):
 
         obs_table.clear()
         if not observations:
-            obs_table.add_row("(no observations returned)", "")
+            obs_table.add_row("(no observations returned)", "", "", "")
             chart_button.disabled = True
             return
 
         for observation in observations:
-            obs_table.add_row(observation.get("date", ""), observation.get("value", ""))
+            obs_table.add_row(
+                observation.get("realtime_start", ""),
+                observation.get("realtime_end", ""),
+                observation.get("date", ""),
+                observation.get("value", ""),
+            )
         chart_button.disabled = False
 
     def _show_chart_popup(self) -> None:
